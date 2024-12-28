@@ -1,7 +1,12 @@
 let lastRenderTime = 0;
-const SNAKE_SPEED = 5;
+const gameBoard = document.getElementById("game-board");
+const gameOver = document.getElementById("game-over");
 
 const main = (currentTime) => {
+    if(isOver) {
+        return;
+    }
+
     window.requestAnimationFrame(main);
     const secondsSinceLastRender = (currentTime - lastRenderTime) / 1000;
     if (secondsSinceLastRender < 1 / SNAKE_SPEED) {
@@ -17,7 +22,13 @@ window.requestAnimationFrame(main);
 
 const update = () => {
     console.log("Render");
+    updateSnake();
+    updateFood();
+    checkDead();
 }
 
 const draw = () => {
+    gameBoard.innerHTML = "";
+    drawSnake(gameBoard);
+    drawFood(gameBoard);
 }
